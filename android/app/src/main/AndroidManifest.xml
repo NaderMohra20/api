@@ -1,9 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.e_commerc_api">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
    <application
         android:label="e_commerc_api"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+<meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAOL6oskHb1mzG0P53lgA_D1NFn1QiQpZo"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
