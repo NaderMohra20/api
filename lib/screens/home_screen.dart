@@ -4,12 +4,10 @@ import 'package:e_commerc_api/consts/global_colors.dart';
 import 'package:e_commerc_api/provider/card_provider.dart';
 import 'package:e_commerc_api/screens/all_products_screen.dart';
 import 'package:e_commerc_api/screens/categories_screen.dart';
-import 'package:e_commerc_api/screens/favorite_screen.dart';
-import 'package:e_commerc_api/screens/product_details.dart';
-import 'package:e_commerc_api/screens/search_screen.dart';
-import 'package:e_commerc_api/screens/settings_screen.dart';
+
 import 'package:e_commerc_api/screens/card_screen.dart';
 import 'package:e_commerc_api/widgets/sale_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -36,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
           appBar: AppBar(
             // elevation: 4,
-            title: const Text('Home'),
+            title: Text('Home'.tr()),
             leading: AppBarIcons(
               function: () {
                 Provider.of<ProductProvidrt>(context, listen: false)
@@ -74,32 +72,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 18,
                 ),
-                TextField(
-                  controller:
-                      Provider.of<ProductProvidrt>(context).searchController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      hintText: "Search",
-                      filled: true,
-                      fillColor: Theme.of(context).cardColor,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: Theme.of(context).cardColor,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                      suffixIcon: Icon(
-                        IconlyLight.search,
-                        color: lightIconsColor,
-                      )),
-                ),
+                // TextField(
+                //   controller:
+                //       Provider.of<ProductProvidrt>(context).searchController,
+                //   keyboardType: TextInputType.text,
+                //   decoration: InputDecoration(
+                //       hintText: "Search",
+                //       filled: true,
+                //       fillColor: Theme.of(context).cardColor,
+                //       enabledBorder: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(10.0),
+                //         borderSide: BorderSide(
+                //           color: Theme.of(context).cardColor,
+                //         ),
+                //       ),
+                //       focusedBorder: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(10.0),
+                //         borderSide: BorderSide(
+                //           width: 1,
+                //           color: Theme.of(context).colorScheme.secondary,
+                //         ),
+                //       ),
+                //       suffixIcon: Icon(
+                //         IconlyLight.search,
+                //         color: lightIconsColor,
+                //       )),
+                // ),
                 const SizedBox(
                   height: 18,
                 ),
@@ -126,8 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            const Text(
-                              "Latest Products",
+                            Text(
+                              "Latest Products".tr(),
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
@@ -186,3 +184,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class Data {}

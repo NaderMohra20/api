@@ -66,8 +66,8 @@ class SplashScreen extends StatelessWidget {
                       const Spacer(),
                       IconButton(
                           onPressed: () {
-                            AppRouter.NavigateWithReplacemtnToWidget(
-                                const LogInScreen());
+                            // AppRouter.NavigateWithReplacemtnToWidget(
+                            //     const LogInScreen());
                           },
                           icon: const Icon(Icons.start))
                     ],

@@ -1,6 +1,6 @@
 import 'package:e_commerc_api/consts/global_colors.dart';
 import 'package:e_commerc_api/screens/home_screen.dart';
-import 'package:e_commerc_api/screens/search_screen.dart';
+
 import 'package:e_commerc_api/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -21,7 +21,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     HomeScreen(),
     FavoriteScreen(),
     SettingsScreen(),
-    SearchScreen()
+    // SearchScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             BottomNavigationBarItem(label: "", icon: Icon(IconlyBold.home)),
             BottomNavigationBarItem(label: "", icon: Icon(IconlyBold.heart)),
             BottomNavigationBarItem(label: "", icon: Icon(IconlyBold.setting)),
-            BottomNavigationBarItem(label: "", icon: Icon(IconlyBold.search)),
+            // BottomNavigationBarItem(label: "", icon: Icon(IconlyBold.search)),
           ]),
       body: widgetpages.elementAt(selectedindex),
     );

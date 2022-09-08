@@ -1,33 +1,24 @@
-import 'package:e_commerc_api/provider/product_providrt.dart';
+import 'package:e_commerc_api/provider/card_provider.dart';
+import 'package:e_commerc_api/provider/favorite_screen.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
-import '../app_router.dart';
 import '../consts/global_colors.dart';
 import '../models/products_model.dart';
-import '../provider/favorite_screen.dart';
-import '../screens/product_details.dart';
+import '../provider/product_providrt.dart';
 
-class ProductWidget extends StatefulWidget {
+class FavoriteWidget extends StatelessWidget {
   ProductsModel productsModel;
-  int index;
+
   // ignore: use_key_in_widget_constructors
-  ProductWidget(this.productsModel, this.index);
+  FavoriteWidget(this.productsModel);
 
-  @override
-  State<ProductWidget> createState() => _ProductWidgetState(index);
-}
-
-class _ProductWidgetState extends State<ProductWidget> {
-  int index;
-  bool clice = false;
-  _ProductWidgetState(this.index);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Consumer<ProductProvidrt>(builder: (context, provider, x) {
+    return Consumer<FavoriteProvider>(builder: (context, provider, x) {
       return Padding(
         padding: const EdgeInsets.all(2.0),
         child: Column(
@@ -46,7 +37,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                               color: Color.fromRGBO(33, 150, 243, 1)),
                           children: <TextSpan>[
                             TextSpan(
-                                text: "${widget.productsModel.price}",
+                                text: "${productsModel.price}",
                                 style: TextStyle(
                                     color: lightTextColor,
                                     fontWeight: FontWeight.w600)),
@@ -54,31 +45,15 @@ class _ProductWidgetState extends State<ProductWidget> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      Provider.of<FavoriteProvider>(context, listen: false)
-                          .addfavorite(provider.products[index]);
-                      setState(() {
-                        clice = !clice;
-                      });
-                    },
-                    icon: Icon(
-                      IconlyBold.heart,
-                      color: clice == true ? lightIconsColor : lightTextColor,
-                    ),
-                  )
+                      onPressed: () {
+                        provider.deletefavorite(productsModel);
+                      },
+                      icon: const Icon(IconlyBold.delete)),
                 ],
               ),
             ),
             const SizedBox(height: 10),
             InkWell(
-              onTap: () {
-                Provider.of<ProductProvidrt>(context, listen: false)
-                    .selectedProduct(
-                        Provider.of<ProductProvidrt>(context, listen: false)
-                            .products[widget.index]
-                            .id!);
-                AppRouter.NavigateToWidget(ProductDetails(widget.index));
-              },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: FancyShimmerImage(
@@ -89,7 +64,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                     color: Colors.red,
                     size: 28,
                   ),
-                  imageUrl: widget.productsModel.images![0],
+                  imageUrl: productsModel.images![0],
                   boxFit: BoxFit.fill,
                 ),
               ),
@@ -98,7 +73,7 @@ class _ProductWidgetState extends State<ProductWidget> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                widget.productsModel.title.toString(),
+                productsModel.title.toString(),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: const TextStyle(

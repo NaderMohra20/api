@@ -36,7 +36,7 @@
 class ProductsModel {
   int? id;
   String? title;
-  int? price;
+  num? price;
   String? description;
   Category? category;
   List<String>? images;

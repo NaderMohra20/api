@@ -1,21 +1,21 @@
 import 'package:e_commerc_api/data/doi_helper.dart';
 import 'package:e_commerc_api/models/categories_model.dart';
 import 'package:e_commerc_api/models/products_model.dart';
-import 'package:e_commerc_api/models/users_model.dart';
+
 import 'package:flutter/material.dart';
 
 class ProductProvidrt extends ChangeNotifier {
   ProductProvidrt() {
     getAllProduct();
-    getAllUsers();
   }
   TextEditingController searchController = TextEditingController();
 
-  String selectCategory = "";
+  String selectFavorite = "";
   ProductsModel? selectProduct;
   List<ProductsModel> products = [];
   List<CategoriesModel> categoryise = [];
-  List<UsersModel> users = [];
+  List<ProductsModel> categoryiseProducts = [];
+
   getAllProduct() async {
     products = await DioHelper.dioHelper.getAllProduct();
     notifyListeners();
@@ -32,15 +32,15 @@ class ProductProvidrt extends ChangeNotifier {
     notifyListeners();
   }
 
-  getCategoryProduct() async {
-    products = await DioHelper.dioHelper.getcategoryProduct(selectCategory);
+  getAllCategoryProducts(String n) async {
+    categoryiseProducts = await DioHelper.dioHelper.getcategoryProduct(n);
     notifyListeners();
   }
 
-  getAllUsers() async {
-    users = await DioHelper.dioHelper.getAllUsers();
-    notifyListeners();
-  }
+  // getCategoryProduct() async {
+  //   products = await DioHelper.dioHelper.getcategoryProduct(selectCategory);
+  //   notifyListeners();
+  // }
 
   // getCategoryProduct() async {
   //   products = await DioHelper.dioHelper.getcategoryProduct(selectCategory);
@@ -52,11 +52,11 @@ class ProductProvidrt extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  // selectedCategory(String category) {
-  //   selectCategory = category;
-  //   getCategoryProduct();
-  //   notifyListeners();
-  // }
+  selectedfavorite(ProductsModel favorite) {
+    selectFavorite = favorite.toString();
+
+    notifyListeners();
+  }
 
   // selectedProduct(int id) async {
   //   selectProduct = await DioHelper.dioHelper.getoneProduct(id);

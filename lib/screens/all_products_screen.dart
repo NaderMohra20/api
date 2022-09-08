@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class AllProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // elevation: 4,
-        title: const Text('All Products'),
+        title: Text('All Products'.tr()),
       ),
       body: Consumer<ProductProvidrt>(builder: (context, provider, x) {
         return provider.products.isEmpty

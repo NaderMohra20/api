@@ -7,14 +7,24 @@ import 'package:provider/provider.dart';
 import '../app_router.dart';
 import '../consts/global_colors.dart';
 import '../models/products_model.dart';
+
+import '../provider/favorite_screen.dart';
 import '../screens/product_details.dart';
 
-class ALLProductWidget extends StatelessWidget {
+class ALLProductWidget extends StatefulWidget {
   ProductsModel productsModel;
   int index;
   // ignore: use_key_in_widget_constructors
   ALLProductWidget(this.productsModel, this.index);
 
+  @override
+  State<ALLProductWidget> createState() => _ALLProductWidgetState(index);
+}
+
+class _ALLProductWidgetState extends State<ALLProductWidget> {
+  int index;
+  _ALLProductWidgetState(this.index);
+  bool clice = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -37,22 +47,34 @@ class ALLProductWidget extends StatelessWidget {
                               color: Color.fromRGBO(33, 150, 243, 1)),
                           children: <TextSpan>[
                             TextSpan(
-                                text: "${productsModel.price}",
+                                text: "${widget.productsModel.price}",
                                 style: TextStyle(
                                     color: lightTextColor,
                                     fontWeight: FontWeight.w600)),
                           ]),
                     ),
                   ),
-                  const Icon(IconlyBold.heart),
+                  IconButton(
+                    onPressed: () {
+                      Provider.of<FavoriteProvider>(context, listen: false)
+                          .addfavorite(provider.products[index]);
+                      setState(() {
+                        clice = !clice;
+                      });
+                    },
+                    icon: Icon(
+                      IconlyBold.heart,
+                      color: clice == true ? lightIconsColor : lightTextColor,
+                    ),
+                  )
                 ],
               ),
             ),
             const SizedBox(height: 10),
             InkWell(
               onTap: () {
-                provider.selectedProduct(provider.products[index].id!);
-                AppRouter.NavigateToWidget(ProductDetails(index));
+                provider.selectedProduct(provider.products[widget.index].id!);
+                AppRouter.NavigateToWidget(ProductDetails(widget.index));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
@@ -64,7 +86,7 @@ class ALLProductWidget extends StatelessWidget {
                     color: Colors.red,
                     size: 28,
                   ),
-                  imageUrl: productsModel.images![0],
+                  imageUrl: widget.productsModel.images![0],
                   boxFit: BoxFit.fill,
                 ),
               ),
@@ -73,9 +95,9 @@ class ALLProductWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                productsModel.title.toString(),
+                widget.productsModel.title.toString(),
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 1,
                 style: const TextStyle(
                   fontSize: 17,
                   //  fontFamily: 'Roboto',

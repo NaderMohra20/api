@@ -1,6 +1,7 @@
 import 'package:e_commerc_api/provider/card_provider.dart';
 import 'package:e_commerc_api/provider/product_providrt.dart';
-import 'package:e_commerc_api/widgets/users_widget.dart';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,7 @@ class CardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Card")),
+      appBar: AppBar(title: Text("Cart".tr())),
       body: Consumer<CartProvider>(builder: (context, provider, x) {
         return provider.cardProducts.isEmpty
             ? const Center(
